@@ -1,0 +1,18 @@
+{
+  "name": "random-api",
+  "version": "1.0.0",
+  "description": "API to get facts, generate images made by Sadman.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sadman",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

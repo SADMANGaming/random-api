@@ -1,8 +1,293 @@
 const express = require('express');
 const { createCanvas, loadImage } = require('canvas');
+const path = require('path');
 const router = express.Router();
 
-// Function to slap
+/*  CHANGE MY MIND  */
+/*
+const changemymind = async (text) => {
+
+    const canvas = createCanvas(800, 600); // Adjust canvas size according to your image
+    const ctx = canvas.getContext('2d');
+
+    const changemymindimg = await loadImage(path.join(__dirname, '../img/changemymind.jpg'));
+    ctx.drawImage(changemymindimg, 0, 0, canvas.width, canvas.height);
+
+    // Set text properties
+    ctx.fillStyle = 'black'; // Text color
+    ctx.font = 'bold 36px sans-serif'; // Font size and style
+    ctx.textAlign = 'center'; // Center the text
+
+    // Function to wrap text
+    const wrapText = (text, x, y, maxWidth, lineHeight) => {
+        const words = text.split(' ');
+        let line = '';
+        let lines = [];
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            const testWidth = metrics.width;
+
+            if (testWidth > maxWidth && n > 0) {
+                lines.push(line);
+                line = words[n] + ' ';
+            } else {
+                line = testLine;
+            }
+        }
+        lines.push(line); // Push the last line
+        return lines;
+    };
+
+    const textX = canvas.width / 2; // Centered horizontally
+    const maxWidth = 700; // Maximum width for wrapping
+    const lineHeight = 40; // Height between lines
+
+    // Wrap the text
+    const wrappedLines = wrapText(text, textX, 0, maxWidth, lineHeight);
+
+    // Calculate the starting y position
+    const startY = 450; // Start position to avoid the character
+
+    // Draw each line of text
+    wrappedLines.forEach((line, index) => {
+        ctx.fillText(line, textX, startY + index * lineHeight);
+    });
+
+    return canvas.toBuffer('image/png'); // Return the image buffer
+};
+
+router.get('/changemymind', async (req, res) => {
+    const { text } = req.query;
+
+    if (!text) {
+        return res.status(400).send('Text string are required');
+    }
+
+    try {
+        const imageBuffer = await changemymind(text);
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer);
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+*/
+/*  HEAVEN  */
+const heaven = async (user) => {
+    const canvas = createCanvas(500, 500);
+    const ctx = canvas.getContext('2d');
+
+    const heaven = await loadImage(path.join(__dirname, '../img/heaven.jpg'));
+    const userimg = await loadImage(user);
+    // right, down, length, width 
+    ctx.drawImage(heaven, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(userimg, 200, 390, 100, 90);
+
+
+    return canvas.toBuffer('image/png');
+};
+
+router.get('/heaven', async (req, res) => {
+    const { user } = req.query;
+
+    if (!user) {
+        return res.status(400).send('User url is required');
+    }
+
+    try {
+        const imageBuffer = await heaven(user);
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer);
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+
+/*  PEEPO SIGN  */
+const peeposign = async (text) => {
+    const canvas = createCanvas(500, 500);
+    const ctx = canvas.getContext('2d');
+
+    const peepo = await loadImage(path.join(__dirname, '../img/peeposign.jpg'));
+    ctx.drawImage(peepo, 0, 0, canvas.width, canvas.height);
+
+    // Set text properties
+    ctx.fillStyle = 'black'; // Text color
+    ctx.font = 'bold 24px sans-serif'; // Font size and style
+    ctx.textAlign = 'center'; // Center the text
+
+    const wrapText = (text, x, y, maxWidth, lineHeight) => {
+        const words = text.split(' ');
+        let line = '';
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            const testWidth = metrics.width;
+
+            if (testWidth > maxWidth && n > 0) {
+                ctx.fillText(line, x, y);
+                line = words[n] + ' ';
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        ctx.fillText(line, x, y);
+    };
+
+    const textX = canvas.width / 2;
+    const textY = canvas.height - 460;
+    const maxWidth = 450;
+    const lineHeight = 30;
+
+    wrapText(text, textX, textY, maxWidth, lineHeight);
+
+    return canvas.toBuffer('image/png');
+};
+
+router.get('/peeposign', async (req, res) => {
+    const { text } = req.query;
+
+    if (!text) {
+        return res.status(400).send('Text string are required');
+    }
+
+    try {
+        const imageBuffer = await peeposign( text);
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer);
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+
+/*  GAY  */
+const gayAvatar = async (user) => {
+    const canvas = createCanvas(500, 500);
+    const ctx = canvas.getContext('2d');
+
+    const avatar = await loadImage(user);
+    const rainbowFlag = await loadImage(path.join(__dirname, '../img/gay.png')); // Ensure this image has transparency
+
+    ctx.drawImage(rainbowFlag, 0, 0, canvas.width, canvas.height);
+
+
+    ctx.globalAlpha = 0.5; 
+
+    const avatarSize = 500;
+    const avatarX = (canvas.width - avatarSize) / 2; 
+    const avatarY = (canvas.height - avatarSize) / 2;
+    // right, down, length, width 
+
+    ctx.drawImage(avatar, avatarX, avatarY, avatarSize, avatarSize);
+
+    ctx.globalAlpha = 1.0;
+
+    return canvas.toBuffer('image/png');
+};
+
+router.get('/gay', async (req, res) => {
+    const { user } = req.query;
+
+    if (!user) {
+        return res.status(400).send('Avatar URL is required');
+    }
+
+    try {
+        const imageBuffer = await gayAvatar(user);
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer); // Send the generated image as PNG
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+
+/*  NOT STONKS  */
+const notstonksImage = async (user) => {
+    const canvas = createCanvas(500, 300);
+    const ctx = canvas.getContext('2d');
+
+    // Load images for slapper and slapped
+    const userimg = await loadImage(user);
+    const stonksbg = await loadImage(path.join(__dirname, '../img/notstonks.png'));
+
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // right, down, length, width 
+    ctx.drawImage(stonksbg, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(userimg, 50, 30, 100, 90);
+
+
+    return canvas.toBuffer('image/png');
+};
+
+router.get('/notstonks', async (req, res) => {
+    try {
+        const { user } = req.query;
+
+        if (!user) {
+            return res.status(400).send('User is required');
+        }
+
+        const imageBuffer = await notstonksImage(user);
+
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer);
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+
+/*  STONKS  */
+
+const stonksImage = async (user) => {
+    const canvas = createCanvas(500, 300); // Set the canvas size
+    const ctx = canvas.getContext('2d');
+
+    // Load images for slapper and slapped
+    const userimg = await loadImage(user);
+    const stonksbg = await loadImage(path.join(__dirname, '../img/stonks.png'));
+
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // right, down, length, width 
+    ctx.drawImage(stonksbg, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(userimg, 70, 30, 100, 90);
+
+
+    return canvas.toBuffer('image/png');
+};
+
+router.get('/stonks', async (req, res) => {
+    try {
+        const { user } = req.query;
+
+        if (!user) {
+            return res.status(400).send('User is required');
+        }
+
+        const imageBuffer = await stonksImage(user);
+
+        res.setHeader('Content-Type', 'image/png');
+        res.send(imageBuffer);
+    } catch (error) {
+        console.error('Error creating image:', error);
+        res.status(500).send('Error creating image');
+    }
+});
+
+/*  SLAP  */
+
 const slapImage = async (slapper, slapped) => {
     const canvas = createCanvas(500, 300); // Set the canvas size
     const ctx = canvas.getContext('2d');
@@ -10,25 +295,21 @@ const slapImage = async (slapper, slapped) => {
     // Load images for slapper and slapped
     const slapperImg = await loadImage(slapper);
     const slappedImg = await loadImage(slapped);
+    const slapbg = await loadImage(path.join(__dirname, '../img/batslap.png'));
 
-    // Draw background (optional)
+
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.drawImage(slapbg, 0, 0, canvas.width, canvas.height);
+    // right, down, length, width 
+    ctx.drawImage(slapperImg, 190, 60, 100, 100);
+    ctx.drawImage(slappedImg, 300, 170, 109, 120);
 
-    // Draw slapper and slapped images
-    ctx.drawImage(slapperImg, 50, 50, 150, 150); // slapper
-    ctx.drawImage(slappedImg, 300, 50, 150, 150); // slapped
-
-    // Draw slap motion (hand)
-    ctx.beginPath();
-    ctx.arc(250, 125, 50, 0, Math.PI * 2, true); // Slap circle
-    ctx.fillStyle = 'rgba(255,0,0,0.5)';
-    ctx.fill();
 
     return canvas.toBuffer('image/png');
 };
 
-// API endpoint for slap
 router.get('/slap', async (req, res) => {
     try {
         const { slapper, slapped } = req.query;
@@ -37,7 +318,6 @@ router.get('/slap', async (req, res) => {
             return res.status(400).send('Both slapper and slapped URLs are required');
         }
 
-        // Generate the slap image
         const imageBuffer = await slapImage(slapper, slapped);
 
         // Set the content type to PNG
@@ -49,28 +329,28 @@ router.get('/slap', async (req, res) => {
     }
 });
 
-// Function to generate a grave image
-const graveImage = async (user) => {
+/*  GRAVE  */
+
+const graveImage = async (userImagePath) => {
     const canvas = createCanvas(500, 300);
     const ctx = canvas.getContext('2d');
 
-    // Load user image
-    const userImg = await loadImage(user);
+    const graveImgPath = path.join(__dirname, '../img/grave.jpg');
+    const graveImg = await loadImage(graveImgPath);
 
-    // Draw background (gray like a grave)
+    const userImg = await loadImage(userImagePath);
+
     ctx.fillStyle = '#A9A9A9';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the user's image on the grave
-    ctx.drawImage(userImg, 150, 50, 200, 200);
-
-    // Draw text like "RIP"
-    ctx.font = 'bold 40px Arial';
-    ctx.fillStyle = '#000000';
-    ctx.fillText('R.I.P.', 200, 270);
+    // right, down, length, width 
+    ctx.drawImage(graveImg, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(userImg, 190, 60, 55, 80);
 
     return canvas.toBuffer('image/png');
 };
+
+module.exports = graveImage;
+
 
 // API endpoint for grave
 router.get('/grave', async (req, res) => {
