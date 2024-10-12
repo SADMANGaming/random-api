@@ -1,0 +1,26 @@
+{
+  "catFacts": [
+    "A cat's nose is as unique as a human's fingerprint.",
+    "Cats sleep for 70% of their lives.",
+    "A group of cats is called a clowder.",
+    "Cats can rotate their ears 180 degrees."
+  ],
+  "birdFacts": [
+    "Penguins can jump up to 6 feet in the air.",
+    "Owls can rotate their heads almost 270 degrees.",
+    "The hummingbird is the only bird that can fly backwards.",
+    "Some birds, like pigeons, can detect Earth's magnetic fields to navigate."
+  ],
+  "videoGameFacts": [
+    "The first video game ever created was called 'Tennis for Two' in 1958.",
+    "The longest gaming session lasted more than 35 hours, according to the Guinness World Records.",
+    "In 'Minecraft,' there's a 1 in 10,000 chance for the title screen to display a typo in the logo.",
+    "The best-selling video game of all time is 'Minecraft,' with over 238 million copies sold."
+  ],
+  "humanFacts": [
+    "The human body contains enough fat to make seven bars of soap.",
+    "Your heart beats about 100,000 times a day.",
+    "The human nose can detect about 1 trillion smells.",
+    "Humans are the only species known to blush."
+  ]
+}
