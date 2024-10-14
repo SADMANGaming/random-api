@@ -2,79 +2,16 @@ const express = require('express');
 const { createCanvas, loadImage } = require('canvas');
 const path = require('path');
 const router = express.Router();
+/*  SPANK  */
+//i will add it soon
+
 
 /*  CHANGE MY MIND  */
 /*
-const changemymind = async (text) => {
-
-    const canvas = createCanvas(800, 600); // Adjust canvas size according to your image
-    const ctx = canvas.getContext('2d');
-
-    const changemymindimg = await loadImage(path.join(__dirname, '../img/changemymind.jpg'));
-    ctx.drawImage(changemymindimg, 0, 0, canvas.width, canvas.height);
-
-    // Set text properties
-    ctx.fillStyle = 'black'; // Text color
-    ctx.font = 'bold 36px sans-serif'; // Font size and style
-    ctx.textAlign = 'center'; // Center the text
-
-    // Function to wrap text
-    const wrapText = (text, x, y, maxWidth, lineHeight) => {
-        const words = text.split(' ');
-        let line = '';
-        let lines = [];
-
-        for (let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + ' ';
-            const metrics = ctx.measureText(testLine);
-            const testWidth = metrics.width;
-
-            if (testWidth > maxWidth && n > 0) {
-                lines.push(line);
-                line = words[n] + ' ';
-            } else {
-                line = testLine;
-            }
-        }
-        lines.push(line); // Push the last line
-        return lines;
-    };
-
-    const textX = canvas.width / 2; // Centered horizontally
-    const maxWidth = 700; // Maximum width for wrapping
-    const lineHeight = 40; // Height between lines
-
-    // Wrap the text
-    const wrappedLines = wrapText(text, textX, 0, maxWidth, lineHeight);
-
-    // Calculate the starting y position
-    const startY = 450; // Start position to avoid the character
-
-    // Draw each line of text
-    wrappedLines.forEach((line, index) => {
-        ctx.fillText(line, textX, startY + index * lineHeight);
-    });
-
-    return canvas.toBuffer('image/png'); // Return the image buffer
-};
-
-router.get('/changemymind', async (req, res) => {
-    const { text } = req.query;
-
-    if (!text) {
-        return res.status(400).send('Text string are required');
-    }
-
-    try {
-        const imageBuffer = await changemymind(text);
-        res.setHeader('Content-Type', 'image/png');
-        res.send(imageBuffer);
-    } catch (error) {
-        console.error('Error creating image:', error);
-        res.status(500).send('Error creating image');
-    }
-});
+   it was hard so i didnt do it
 */
+
+
 /*  HEAVEN  */
 const heaven = async (user) => {
     const canvas = createCanvas(500, 500);
@@ -102,12 +39,13 @@ router.get('/heaven', async (req, res) => {
         res.setHeader('Content-Type', 'image/png');
         res.send(imageBuffer);
     } catch (error) {
-        console.error('Error creating image:', error);
+        console.error('Error creating imae:', error);
         res.status(500).send('Error creating image');
     }
 });
 
 /*  PEEPO SIGN  */
+// this has some bugs
 const peeposign = async (text) => {
     const canvas = createCanvas(500, 500);
     const ctx = canvas.getContext('2d');
@@ -119,7 +57,7 @@ const peeposign = async (text) => {
     ctx.fillStyle = 'black'; // Text color
     ctx.font = 'bold 24px sans-serif'; // Font size and style
     ctx.textAlign = 'center'; // Center the text
-
+//ty chatgpt
     const wrapText = (text, x, y, maxWidth, lineHeight) => {
         const words = text.split(' ');
         let line = '';
@@ -168,6 +106,7 @@ router.get('/peeposign', async (req, res) => {
 });
 
 /*  GAY  */
+//why are you gay?
 const gayAvatar = async (user) => {
     const canvas = createCanvas(500, 500);
     const ctx = canvas.getContext('2d');
@@ -210,6 +149,7 @@ router.get('/gay', async (req, res) => {
 });
 
 /*  NOT STONKS  */
+// buisness 
 const notstonksImage = async (user) => {
     const canvas = createCanvas(500, 300);
     const ctx = canvas.getContext('2d');
