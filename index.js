@@ -6,8 +6,8 @@ const app = express();
 const port = 3000;
 
 // Routes
-app.use('/facts', factsRouter);
-app.use('/images', imagesRouter);
+app.use('/facts', factsRouter); // text facts
+app.use('/images', imagesRouter); // images :p
 
 const apijson = {
     discord: "https://discord.gg/2AJAMKsa3U",
@@ -31,5 +31,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Random API is running at localhost:${port}`);
 });
